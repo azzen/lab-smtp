@@ -8,7 +8,8 @@ public class Message {
     private String subject;
     private String body;
 
-    Message (String msg) {
+    public Message() {}
+    public Message (String msg) {
         // Peut-être msg.indexOf("\r\n\r\n") au lieu du gros truc ?
         subject = msg.substring(0, msg.indexOf(System.getProperty("line.separator")));
         body = msg.substring(msg.indexOf(System.getProperty("line.separator")) + 4);

@@ -5,7 +5,7 @@ public class Person {
     private final String lname;
     private final String address;
 
-    Person (String fname, String lname, String address) {
+    public Person (String fname, String lname, String address) {
         this.fname = fname;
         this.lname = lname;
         this.address = address;
