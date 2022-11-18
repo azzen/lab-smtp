@@ -4,10 +4,8 @@ import ch.heigvd.dai.mailbot.model.mail.Message;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,7 +44,7 @@ public class ConfigurationManager implements IConfigurationManager {
 
     private void parseMessages(String filename) {
         try {
-            String content = Files.readString(Paths.get(filename));
+            String content = Files.readString(Path.of(filename));
             String[] rawMessages = content.split("//--//\n");
             this.messages = new Message[rawMessages.length];
             for (int i = 0; i < rawMessages.length; ++i) {
@@ -59,7 +57,7 @@ public class ConfigurationManager implements IConfigurationManager {
 
     private void parseEmail(String filename) {
         try {
-            String content = Files.readString(Paths.get(filename));
+            String content = Files.readString(Path.of(filename));
             this.victims = content.split("\n");
         } catch (IOException e) {
             throw new RuntimeException(e);
