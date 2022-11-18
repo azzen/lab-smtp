@@ -73,7 +73,7 @@ public class ConfigurationManager implements IConfigurationManager {
 
     @Override
     public int getSmtpPort() {
-        return smtpPort;
+        return getInstance().smtpPort;
     }
 
     @Override
