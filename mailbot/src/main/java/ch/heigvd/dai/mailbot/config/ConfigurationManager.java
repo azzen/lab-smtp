@@ -1,6 +1,7 @@
 package ch.heigvd.dai.mailbot.config;
 
 import ch.heigvd.dai.mailbot.model.mail.Message;
+import ch.heigvd.dai.mailbot.model.mail.Person;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +17,7 @@ public class ConfigurationManager implements IConfigurationManager {
     private String smtpServerAddress;
     private int smtpPort;
     private int numberOfGroups;
-    private String[] victims;
+    private Person[] victims;
     private Message[] messages;
 
     private ConfigurationManager() {
@@ -58,7 +59,12 @@ public class ConfigurationManager implements IConfigurationManager {
     private void parseEmail(String filename) {
         try {
             String content = Files.readString(Path.of(filename));
-            this.victims = content.split("\n");
+            String[] victimsData = content.split("\n");
+            this.victims = new Person[victimsData.length];
+            for (int i = 0; i < victimsData.length; ++i) {
+                String[] data = victimsData[i].split(",");
+                this.victims[i] = new Person(data[0], data[1], data[2]);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -79,7 +85,7 @@ public class ConfigurationManager implements IConfigurationManager {
         return getInstance().smtpServerAddress;
     }
     @Override
-    public String[] getVictims() {
+    public Person[] getVictims() {
         return getInstance().victims;
     }
 
