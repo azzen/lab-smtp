@@ -10,7 +10,7 @@ public class Prank {
     private Person victimSender;
     private final List<Person> victimRecipients = new ArrayList<>();
     private final List<Person> witnessRecipients = new ArrayList<>();
-    private String message;
+    private Message message;
 
 
 
@@ -38,11 +38,11 @@ public class Prank {
         return witnessRecipients;
     }
 
-    public String getMessage() {
+    public Message getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(Message message) {
         this.message = message;
     }
 
