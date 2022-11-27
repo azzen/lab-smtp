@@ -1,5 +1,6 @@
 package ch.heigvd.dai.mailbot.config;
 
+import ch.heigvd.dai.mailbot.model.mail.Email;
 import ch.heigvd.dai.mailbot.model.mail.Message;
 import ch.heigvd.dai.mailbot.model.mail.Person;
 
@@ -63,7 +64,7 @@ public class ConfigurationManager implements IConfigurationManager {
             this.victims = new Person[victimsData.length];
             for (int i = 0; i < victimsData.length; ++i) {
                 String[] data = victimsData[i].split(",");
-                this.victims[i] = new Person(data[0], data[1], data[2]);
+                this.victims[i] = new Person(data[0].trim(), data[1].trim(), new Email(data[2].trim()));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
