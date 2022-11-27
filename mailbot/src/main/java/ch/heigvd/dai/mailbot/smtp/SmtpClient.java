@@ -1,11 +1,13 @@
 package ch.heigvd.dai.mailbot.smtp;
 
 import ch.heigvd.dai.mailbot.config.IConfigurationManager;
+import ch.heigvd.dai.mailbot.model.mail.Email;
 import ch.heigvd.dai.mailbot.model.mail.Message;
 
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 public class SmtpClient implements ISmtpClient {
@@ -44,15 +46,15 @@ public class SmtpClient implements ISmtpClient {
             LOG.info(line);
         }
         writer.write("MAIL FROM:");
-        writer.write(message.getFrom());
+        writer.write(message.getFrom().toString());
         writer.write("\r\n");
         writer.flush();
         line = reader.readLine();
         LOG.info(line);
 
-        for (String to : message.getTo()) {
+        for (Email to : message.getTo()) {
             writer.write("RCPT TO:");
-            writer.write(to);
+            writer.write(to.toString());
             writer.write("\r\n");
             writer.flush();
             line = reader.readLine();
@@ -60,9 +62,9 @@ public class SmtpClient implements ISmtpClient {
 
         }
 
-        for (String to : message.getTo()) {
+        for (Email to : message.getCc()) {
             writer.write("RCPT TO:");
-            writer.write(to);
+            writer.write(to.toString());
             writer.write("\r\n");
             writer.flush();
             line = reader.readLine();
@@ -70,9 +72,9 @@ public class SmtpClient implements ISmtpClient {
 
         }
 
-        for (String to : message.getBcc()) {
+        for (Email to : message.getBcc()) {
             writer.write("RCPT TO:");
-            writer.write(to);
+            writer.write(to.toString());
             writer.write("\r\n");
             writer.flush();
             line = reader.readLine();
@@ -89,8 +91,8 @@ public class SmtpClient implements ISmtpClient {
 
         writer.write("Subject: " + message.getSubject() + "\r\n");
         writer.write("From: " + message.getFrom() + "\r\n");
-        writer.write("To: " + String.join(", ", message.getTo()) + "\r\n");
-        writer.write("Cc: " + String.join(", ", message.getCc()) + "\r\n");
+        writer.write("To: " + String.join(", ", Arrays.toString(message.getTo())) + "\r\n");
+        writer.write("Cc: " + String.join(", ", Arrays.toString(message.getCc())) + "\r\n");
         writer.flush();
 
         writer.write(message.getBody());
