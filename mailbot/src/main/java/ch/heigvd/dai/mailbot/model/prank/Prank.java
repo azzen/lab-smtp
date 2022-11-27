@@ -1,5 +1,6 @@
 package ch.heigvd.dai.mailbot.model.prank;
 
+import ch.heigvd.dai.mailbot.model.mail.Email;
 import ch.heigvd.dai.mailbot.model.mail.Message;
 import ch.heigvd.dai.mailbot.model.mail.Person;
 import java.util.ArrayList;
@@ -46,30 +47,21 @@ public class Prank {
         this.message = message;
     }
 
-    /*
     public Message generateMailMessage() {
         Message msg = new Message();
 
         msg.setBody(this.message.getBody() + "\r\n" + victimSender.getFirstName());
 
-        String[] to = victimRecipients
+        Email[] to = victimRecipients
                 .stream()
-                .map(p -> p.getAddress())
+                .map(Person::getAddress)
                 .collect(Collectors.toList())
-                .toArray(new String[]{});
+                .toArray(new Email[]{});
         msg.setTo(to);
-
-        String[] cc = witnessRecipients
-                .stream()
-                .map(p -> p.getAddress())
-                .collect(Collectors.toList())
-                .toArray(new String[]{});
-        msg.setCc(cc);
 
         msg.setFrom(victimSender.getAddress());
         msg.setSubject(this.message.getSubject());
 
         return msg;
     }
-     */
 }
