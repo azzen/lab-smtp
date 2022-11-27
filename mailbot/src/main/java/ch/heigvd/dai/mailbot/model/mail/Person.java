@@ -1,27 +1,25 @@
 package ch.heigvd.dai.mailbot.model.mail;
 
 public class Person {
-    private final String fname;
-    private final String lname;
-    private final String address;
+    private final String firstName;
+    private final String lastName;
+    private final Email address;
 
-    public Person (String fname, String lname, String address) {
-        this.fname = fname;
-        this.lname = lname;
+    public Person (String firstName, String lastName, Email address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.address = address;
     }
 
-    // TODO Autre constructeur ?
-
-    public String getFname() {
-        return fname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLname() {
-        return lname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getAddress() {
+    public Email getAddress() {
         return address;
     }
 }

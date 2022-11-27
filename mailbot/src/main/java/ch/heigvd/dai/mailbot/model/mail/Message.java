@@ -1,49 +1,49 @@
 package ch.heigvd.dai.mailbot.model.mail;
 
 public class Message {
-    private String from;
-    private String[] to = new String[0];
-    private String[] cc = new String[0];
-    private String[] bcc = new String[0]; // Cacher les personnes en copies
+    private Email from;
+    private Email[] to = new Email[0];
+    private Email[] cc = new Email[0];
+    private Email[] bcc = new Email[0]; // Cacher les personnes en copies
     private String subject;
     private String body;
 
     public Message() {}
     public Message (String msg) {
-        // Peut-être msg.indexOf("\r\n\r\n") au lieu du gros truc ?
         subject = msg.substring(0, msg.indexOf(System.getProperty("line.separator")));
-        body = msg.substring(msg.indexOf(System.getProperty("line.separator")) + 4);
+        body = msg.substring(msg.indexOf(System.getProperty("line.separator")) +
+                System.getProperty("line.separator").length() * 2);
     }
 
-    public String getFrom() {
+    public Email getFrom() {
         return from;
     }
 
-    public void setFrom(String from) {
+    public void setFrom(Email from) {
         this.from = from;
     }
 
-    public String[] getTo() {
+    public Email[] getTo() {
         return to;
     }
 
-    public void setTo(String[] to) {
+    public void setTo(Email[] to) {
         this.to = to;
     }
 
-    public String[] getCc() {
+    public Email[] getCc() {
         return cc;
     }
 
-    public void setCc(String[] cc) {
+    public void setCc(Email[] cc) {
         this.cc = cc;
     }
 
-    public String[] getBcc() {
+    public Email[] getBcc() {
         return bcc;
     }
 
-    public void setBcc(String[] bcc) {
+    public void setBcc(Email[] bcc) {
         this.bcc = bcc;
     }
 
