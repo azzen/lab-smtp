@@ -82,6 +82,8 @@ Firstname,Lastname,email
 
 Please note that email will be validated. Therefore they should be correctly formatted.
 
+⚠️ Make sure to use correct line separators for both files, i.e. use CRLF on windows systems and LF on unix-like systems. There will be issues if you don't.
+
 ## Implementation
 
 Todo
