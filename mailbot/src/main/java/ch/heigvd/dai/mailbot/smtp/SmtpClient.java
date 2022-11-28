@@ -8,6 +8,7 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.logging.Logger;
 
 public class SmtpClient implements ISmtpClient {
@@ -88,8 +89,8 @@ public class SmtpClient implements ISmtpClient {
         LOG.info(line);
 
         writer.write("Content-type: text/plain; charset=\"utf-8\"\r\n");
-
-        writer.write("Subject: " + message.getSubject() + "\r\n");
+        String encodedSubject = Base64.getEncoder().encodeToString(message.getSubject().getBytes());
+        writer.write("Subject: =?utf8?B?" + encodedSubject + "?=\r\n");
         writer.write("From: " + message.getFrom() + "\r\n");
         writer.write("To: " + String.join(", ", Arrays.toString(message.getTo())) + "\r\n");
         writer.write("Cc: " + String.join(", ", Arrays.toString(message.getCc())) + "\r\n");
