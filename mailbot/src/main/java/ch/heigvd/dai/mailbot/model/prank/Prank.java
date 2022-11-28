@@ -10,17 +10,10 @@ import java.util.stream.Collectors;
 public class Prank {
     private Person victimSender;
     private final List<Person> victimRecipients = new ArrayList<>();
-    private final List<Person> witnessRecipients = new ArrayList<>();
     private Message message;
-
-
 
     public void addVictimRecipients(List<Person> victims) {
         victimRecipients.addAll(victims);
-    }
-
-    public void addWitnessRecipients(List<Person> witness) {
-        witnessRecipients.addAll(witness);
     }
 
     public Person getVictimSender() {
@@ -33,10 +26,6 @@ public class Prank {
 
     public List<Person> getVictimRecipients() {
         return victimRecipients;
-    }
-
-    public List<Person> getWitnessRecipients() {
-        return witnessRecipients;
     }
 
     public Message getMessage() {
