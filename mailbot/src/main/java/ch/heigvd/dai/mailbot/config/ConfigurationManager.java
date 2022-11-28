@@ -47,7 +47,7 @@ public class ConfigurationManager implements IConfigurationManager {
     private void parseMessages(String filename) {
         try {
             String content = Files.readString(Path.of(filename));
-            String[] rawMessages = content.split("//--//\n");
+            String[] rawMessages = content.split("//--//" + System.getProperty("line.separator"));
             this.messages = new Message[rawMessages.length];
             for (int i = 0; i < rawMessages.length; ++i) {
                 this.messages[i] = new Message(rawMessages[i]);
@@ -60,7 +60,7 @@ public class ConfigurationManager implements IConfigurationManager {
     private void parseEmail(String filename) {
         try {
             String content = Files.readString(Path.of(filename));
-            String[] victimsData = content.split("\n");
+            String[] victimsData = content.split(System.getProperty("line.separator"));
             this.victims = new Person[victimsData.length];
             for (int i = 0; i < victimsData.length; ++i) {
                 String[] data = victimsData[i].split(",");
