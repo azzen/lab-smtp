@@ -21,11 +21,11 @@ public class PrankGenerator {
         this.configurationManager = configurationManager;
     }
 
-    public List<Prank> generatePranks() throws Exception {
+    public List<Prank> generatePranks() {
         List<Prank> pranks = new ArrayList<>();
-        Message[] messages = configurationManager.getMessages();
+        List<Message> messages = new ArrayList<>(List.of(configurationManager.getMessages()));
 
-        if (messages.length == 0) {
+        if (messages.size() == 0) {
             LOG.severe("No prank messages were found, there should be at least one");
             throw new RuntimeException("No prank messages were found");
         }
@@ -44,6 +44,7 @@ public class PrankGenerator {
         List<Group> groups = generateGroups(configurationManager.getVictims(), groupCount);
 
         // Pick one victim to appear as the sender and pick one random prank message
+        Collections.shuffle(messages);
         for (Group group : groups) {
             Prank prank = new Prank();
             List<Person> victims = group.getMembers();
@@ -53,8 +54,8 @@ public class PrankGenerator {
             prank.setVictimSender(sender);
             prank.addVictimRecipients(victims);
 
-            Message message = messageIndex < messages.length ? messages[messageIndex] : messages[0];
-            messageIndex = (messageIndex + 1) % messages.length;
+            Message message = messageIndex < messages.size() ? messages.get(messageIndex) : messages.get(0);
+            messageIndex = (messageIndex + 1) % messages.size();
             prank.setMessage(message);
             pranks.add(prank);
         }
