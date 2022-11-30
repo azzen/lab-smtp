@@ -10,9 +10,10 @@ Date November 2022
 
 ## Introduction
 
-Mailbot is an SMTP client that sends forged emails to a list of groups that have been randomly generated from a list of people.
+Mailbot is an SMTP client that sends forged emails (we'll call them "campaign of pranks")
+to groups that have been randomly generated from a list of people.
 
-This application is coupled with a mock SMTP server that intercepts emails. The main goal of the app is to work with the SMTP protocol from scratch and demonstrate how easy it is to forge emails.
+This application should be used with a mock SMTP server that intercepts emails (so we avoid sending them to real people). The main goal of the app is to work with the SMTP protocol and the Socket API in Java and demonstrate how easy it is to forge emails.
 
 This application has been developed during DAI (network application development) course at HEIG-VD.
 
@@ -35,7 +36,7 @@ More information [here](https://github.com/DominiqueComte/MockMock)
 
 ---
 
-To demonstrate how we send emails we'll use a custom made docker image with a MockMock server.
+To demonstrate how we send emails we'll use a custom-made docker image with a MockMock server.
 
 You'll need to have `docker` installed.
 
@@ -52,7 +53,8 @@ Your mockmock server should be accessible at the following address: `http://loca
 
 ## How to use the application
 
-Before launching the app, you must build the application using the following command: `mvn clean package`. You should be able to launch the jar application with the `java jar executable.jar`.
+Before launching the app, you must build the application using the following command: `mvn clean package` and copy the `config` to the same location as the jar file. 
+Then you should be able to launch the jar application with the `java jar executable.jar`.
 
 
 ### Application configuration
@@ -80,10 +82,18 @@ You'll also need a list of victims to send emails to. You must use the following
 Firstname,Lastname,email
 ```
 
-Please note that email will be validated. Therefore they should be correctly formatted.
+Please note that email will be validated. Therefore, they should be correctly formatted.
 
-⚠️ Make sure to use correct line separators for both files, i.e. use CRLF on windows systems and LF on unix-like systems. There will be issues if you don't.
+⚠️ Make sure to use correct line separators for both files, i.e. use CRLF on Windows systems and LF on unix-like systems. There will be issues if you don't.
 
 ## Implementation
 
-Todo
+![uml](figures/mailbot.drawio.png)
+
+- `ConfigurationManager` reads and parses the program properties, victims and messages. 
+- `SmtpClient` connects to the SMTP server and sends mails
+- `PrankGenerator` generates fake messages with random victims and 
+- `Message` is a generic structure of a mail 
+- `Person` represents a victim
+- `Email` represents a validated email address
+- `Group` list of victims that must have at lease 3 people in it
