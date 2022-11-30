@@ -96,4 +96,4 @@ Please note that email will be validated. Therefore, they should be correctly fo
 - `Message` is a generic structure of a mail 
 - `Person` represents a victim
 - `Email` represents a validated email address
-- `Group` list of victims that must have at lease 3 people in it
+- `Group` list of victims that must have at least 3 people in it
