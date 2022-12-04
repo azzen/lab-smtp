@@ -42,13 +42,15 @@ More information [here](https://github.com/DominiqueComte/MockMock)
 
 To demonstrate how we send emails we'll use a custom-made docker image with the MockMock server.
 
-You can simply run the following scripts in the `MockMock` directory: `build.sh` and `run.sh`.
+You must have `Docker` installed and launched on your machine.
+
+Then you can simply run the following scripts in the `MockMock` directory: `build.sh` and `run.sh`.
 
 Your MockMock server should be accessible at the following address: `http://localhost:8000`
 
 ## How to use the application
 
-Before launching the app, you must build the application using the following command: `mvn clean package` and copy the `config` to the same location as the jar file. 
+Before launching the app, you must build the application using the following command: `mvn clean package` and copy the `config` directory to the same location as the jar file. 
 Then you should be able to launch the jar application with the command `java jar executable.jar`.
 
 ### Application configuration
