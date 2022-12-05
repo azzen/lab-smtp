@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class SmtpClient implements ISmtpClient {
     private static final Logger LOG = Logger.getLogger(SmtpClient.class.getName());
@@ -92,8 +93,17 @@ public class SmtpClient implements ISmtpClient {
         String encodedSubject = Base64.getEncoder().encodeToString(message.getSubject().getBytes());
         writer.write("Subject: =?utf8?B?" + encodedSubject + "?=\r\n");
         writer.write("From: " + message.getFrom() + "\r\n");
-        writer.write("To: " + String.join(", ", Arrays.toString(message.getTo())) + "\r\n");
-        writer.write("Cc: " + String.join(", ", Arrays.toString(message.getCc())) + "\r\n");
+        
+        String to = Arrays.stream(message.getTo()).map(Email::toString)
+                .collect(Collectors.joining(", "));
+        
+        writer.write("To: " + to + "\r\n");
+
+        String cc = Arrays.stream(message.getCc()).map(Email::toString)
+                .collect(Collectors.joining(", "));
+
+        writer.write("Cc: " + cc + "\r\n");
+
         writer.flush();
 
         writer.write(message.getBody());
